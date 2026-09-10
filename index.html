@@ -1,0 +1,1052 @@
+<title>CHLS 第一、二章骨架</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  :root {
+    --ground:    #FBFAF7;
+    --surface:   #FFFFFF;
+    --sunk:      #F2F1EC;
+    --ink:       #17202A;
+    --ink-soft:  #4A5765;
+    --ink-faint: #7A8794;
+    --rule:      #DCE0E4;
+    --rule-soft: #EAEDF0;
+    --accent:    #1F5F8B;
+    --accent-dim:#5A93B8;
+    --accent-wash:#E7F0F6;
+    --trad:      #A9521E;
+    --trad-wash: #F7EBE3;
+
+    --serif: "Noto Serif TC", "Songti TC", "PMingLiU", Georgia, serif;
+    --sans:  "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", system-ui, sans-serif;
+    --mono:  "IBM Plex Mono", "Cascadia Mono", Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:    #12171D;
+      --surface:   #1A2129;
+      --sunk:      #161C23;
+      --ink:       #E4E9EE;
+      --ink-soft:  #A7B3BF;
+      --ink-faint: #77838F;
+      --rule:      #2C353F;
+      --rule-soft: #232B34;
+      --accent:    #74B4DA;
+      --accent-dim:#4A7E9E;
+      --accent-wash:#182A36;
+      --trad:      #D9905F;
+      --trad-wash: #2C1F17;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:    #12171D;
+    --surface:   #1A2129;
+    --sunk:      #161C23;
+    --ink:       #E4E9EE;
+    --ink-soft:  #A7B3BF;
+    --ink-faint: #77838F;
+    --rule:      #2C353F;
+    --rule-soft: #232B34;
+    --accent:    #74B4DA;
+    --accent-dim:#4A7E9E;
+    --accent-wash:#182A36;
+    --trad:      #D9905F;
+    --trad-wash: #2C1F17;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px 96px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0 48px;
+  }
+
+  /* ---------- masthead ---------- */
+
+  .mast {
+    grid-column: 1 / -1;
+    padding: 56px 0 32px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .mast .kicker {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .mast h1 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(30px, 5vw, 46px);
+    line-height: 1.28;
+    letter-spacing: .01em;
+    margin: 0 0 18px;
+    text-wrap: balance;
+  }
+  .mast .sub {
+    color: var(--ink-soft);
+    max-width: 60ch;
+    margin: 0;
+    font-size: 15.5px;
+  }
+  .src {
+    margin-top: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    font-size: 13px;
+    color: var(--ink-faint);
+    font-family: var(--mono);
+  }
+
+  /* ---------- nav rail ---------- */
+
+  nav.rail { display: none; }
+
+  @media (min-width: 1000px) {
+    .wrap { grid-template-columns: 200px minmax(0, 1fr); }
+    .mast { grid-column: 1 / -1; }
+    nav.rail {
+      display: block;
+      position: sticky;
+      top: 0;
+      align-self: start;
+      max-height: 100vh;
+      overflow-y: auto;
+      padding: 40px 0;
+      font-size: 13.5px;
+    }
+    nav.rail a {
+      display: block;
+      color: var(--ink-soft);
+      text-decoration: none;
+      padding: 5px 0 5px 12px;
+      border-left: 2px solid var(--rule-soft);
+      line-height: 1.5;
+    }
+    nav.rail a:hover, nav.rail a:focus-visible {
+      color: var(--accent);
+      border-left-color: var(--accent);
+    }
+    nav.rail .grp {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin: 22px 0 8px;
+    }
+    nav.rail .grp:first-child { margin-top: 0; }
+  }
+
+  main { min-width: 0; padding-top: 40px; }
+
+  /* ---------- sections ---------- */
+
+  section { margin-bottom: 60px; scroll-margin-top: 24px; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(21px, 2.6vw, 27px);
+    line-height: 1.4;
+    margin: 0 0 20px;
+    text-wrap: balance;
+  }
+
+  h3 {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 16.5px;
+    margin: 34px 0 10px;
+    color: var(--ink);
+  }
+
+  p { margin: 0 0 16px; max-width: 68ch; }
+  main p { color: var(--ink-soft); }
+  main p strong { color: var(--ink); font-weight: 700; }
+
+  .lede {
+    font-size: 17px;
+    color: var(--ink) !important;
+    border-left: 3px solid var(--accent);
+    padding-left: 18px;
+    margin-bottom: 26px;
+  }
+
+  /* ---------- inline bits ---------- */
+
+  .en {
+    font-family: var(--mono);
+    font-size: .88em;
+    color: var(--ink-faint);
+  }
+  main p strong .en { color: var(--ink-faint); }
+
+  /* ---------- lists ---------- */
+
+  ul.plain, ol.steps { margin: 0 0 18px; padding: 0; list-style: none; max-width: 68ch; }
+
+  ul.plain > li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 11px;
+    color: var(--ink-soft);
+  }
+  ul.plain > li::before {
+    content: "";
+    position: absolute;
+    left: 2px; top: .82em;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent-dim);
+  }
+  ul.plain > li strong { color: var(--ink); }
+
+  ol.steps { counter-reset: s; }
+  ol.steps > li {
+    counter-increment: s;
+    position: relative;
+    padding-left: 38px;
+    margin-bottom: 13px;
+    color: var(--ink-soft);
+  }
+  ol.steps > li::before {
+    content: counter(s);
+    position: absolute;
+    left: 0; top: .18em;
+    width: 24px; height: 24px;
+    display: grid; place-items: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    background: var(--accent-wash);
+    border-radius: 50%;
+  }
+  ol.steps > li strong { color: var(--ink); }
+
+  /* ---------- findings grid ---------- */
+
+  .findings {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(228px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin: 0 0 20px;
+  }
+  .findings > div {
+    background: var(--surface);
+    padding: 18px 18px 20px;
+  }
+  .findings h4 {
+    margin: 0 0 7px;
+    font-size: 14.5px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  .findings p {
+    margin: 0;
+    font-size: 13.8px;
+    line-height: 1.72;
+    color: var(--ink-soft);
+  }
+  .findings .num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  /* ---------- contrast table ---------- */
+
+  .scroll { overflow-x: auto; margin: 0 0 20px; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 520px;
+    font-size: 14.2px;
+    line-height: 1.7;
+  }
+  caption {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding-bottom: 10px;
+  }
+  th, td {
+    text-align: left;
+    vertical-align: top;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  thead th {
+    font-size: 12.5px;
+    font-weight: 700;
+    border-bottom: 1.5px solid var(--rule);
+    color: var(--ink);
+  }
+  thead th.a { color: var(--accent); }
+  thead th.b { color: var(--trad); }
+  tbody td:first-child { color: var(--ink); }
+  tbody td:last-child { color: var(--ink-soft); }
+  tbody tr:last-child td { border-bottom: none; }
+
+  /* ---------- quadrants ---------- */
+
+  .quad {
+    display: grid;
+    grid-template-columns: 92px 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin: 0 0 10px;
+    font-size: 14px;
+  }
+  .quad > * { background: var(--surface); padding: 13px 15px; }
+  .quad .hd {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: .06em;
+    color: var(--ink-faint);
+    display: flex;
+    align-items: flex-end;
+  }
+  .quad .side {
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  .quad .cell strong { display: block; margin-bottom: 4px; font-size: 14.5px; }
+  .quad .cell span { color: var(--ink-soft); font-size: 13.2px; line-height: 1.65; }
+  .quad .cell.star { background: var(--accent-wash); }
+  .quad .cell.star strong { color: var(--accent); }
+
+  /* ---------- timescale figure ---------- */
+
+  figure { margin: 0 0 22px; }
+  .fig-frame {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    padding: 22px 20px 16px;
+    overflow-x: auto;
+  }
+  .fig-frame svg { display: block; min-width: 640px; width: 100%; height: auto; }
+  figcaption {
+    font-size: 13px;
+    color: var(--ink-faint);
+    margin-top: 10px;
+    line-height: 1.65;
+    max-width: 68ch;
+  }
+  .ax-line { stroke: var(--rule); stroke-width: 1.5; }
+  .ax-tick { stroke: var(--rule); stroke-width: 1; }
+  .ax-lab  { fill: var(--ink-faint); font-family: var(--mono); font-size: 11px; }
+  .band-r  { fill: var(--accent-wash); stroke: var(--accent-dim); stroke-width: 1; }
+  .band-t  { fill: var(--ink); font-family: var(--sans); font-size: 13px; font-weight: 700; }
+  .band-s  { fill: var(--ink-faint); font-family: var(--sans); font-size: 11.5px; }
+
+  /* ---------- supervenience chain ---------- */
+
+  .chain {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 18px;
+    font-size: 14px;
+  }
+  .chain b {
+    background: var(--sunk);
+    border: 1px solid var(--rule);
+    padding: 6px 12px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .chain i {
+    font-style: normal;
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+
+  /* ---------- callout ---------- */
+
+  .note {
+    background: var(--trad-wash);
+    border-left: 3px solid var(--trad);
+    padding: 15px 18px;
+    margin: 0 0 20px;
+    max-width: 68ch;
+  }
+  .note .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--trad);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .note p { margin: 0; font-size: 14.5px; color: var(--ink-soft); }
+  .note p + p { margin-top: 9px; }
+  .note strong { color: var(--ink); }
+
+  /* ---------- two-level spine ---------- */
+
+  .spine {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin: 0 0 20px;
+  }
+  .spine > div { background: var(--surface); padding: 20px; }
+  .spine h4 {
+    margin: 0 0 4px;
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .spine .lat {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    display: block;
+    margin-bottom: 13px;
+  }
+  .spine dl { margin: 0; font-size: 13.6px; line-height: 1.7; }
+  .spine dt {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 11px;
+  }
+  .spine dt:first-child { margin-top: 0; }
+  .spine dd { margin: 2px 0 0; color: var(--ink-soft); }
+
+  /* ---------- timeline ---------- */
+
+  .years { margin: 0; max-width: 68ch; }
+  .years div {
+    display: grid;
+    grid-template-columns: 62px 1fr;
+    gap: 16px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--rule-soft);
+    font-size: 14.2px;
+  }
+  .years div:last-child { border-bottom: none; }
+  .years dt {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    color: var(--accent);
+    font-size: 13.5px;
+  }
+  .years dd { margin: 0; color: var(--ink-soft); }
+
+  /* ---------- footer ---------- */
+
+  footer {
+    grid-column: 1 / -1;
+    margin-top: 30px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+    font-size: 13px;
+    color: var(--ink-faint);
+    max-width: 68ch;
+  }
+
+  a { color: var(--accent); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="kicker">Cambridge Handbook of the Learning Sciences · 3rd ed. 2022</div>
+    <h1>學習科學的兩塊基石：從灌輸主義的批判，到元素式與系統式的分工</h1>
+    <p class="sub">第 1 章鋪陳這個領域「主張什麼、憑什麼這樣主張」；第 2 章交出它的理論骨架與方法論座標。兩章合起來回答同一個問題：學習科學跟教育心理學、教學設計到底差在哪裡。</p>
+    <div class="src">
+      <span>Ch.1　Sawyer　pp. 1–26</span>
+      <span>Ch.2　Nathan &amp; Sawyer　pp. 27–52</span>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="章節導覽">
+    <div class="grp">Chapter 1</div>
+    <a href="#c1-target">批判的對象：灌輸主義</a>
+    <a href="#c1-seven">七項學習共識</a>
+    <a href="#c1-deep">深層 vs 表層</a>
+    <a href="#c1-episte">知識觀的轉向</a>
+    <a href="#c1-mech">六個學習機制</a>
+    <a href="#c1-socio">社會文化轉向</a>
+    <a href="#c1-justice">公平與科技</a>
+    <a href="#c1-method">方法論</a>
+
+    <div class="grp">Chapter 2</div>
+    <a href="#c2-def">學習的定義</a>
+    <a href="#c2-time">對數時間尺度</a>
+    <a href="#c2-stokes">Stokes 四象限</a>
+    <a href="#c2-found">五大思想基礎</a>
+    <a href="#c2-episte">兩種認識論</a>
+    <a href="#c2-super">附隨性</a>
+    <a href="#c2-spine">元素式／系統式</a>
+    <a href="#c2-integrate">整合與規模化</a>
+
+    <div class="grp">複習</div>
+    <a href="#seam">兩章的接縫</a>
+    <a href="#traps">易混淆對照</a>
+    <a href="#years">關鍵年表</a>
+  </nav>
+
+  <main>
+
+    <!-- ===================== CH 1 ===================== -->
+
+    <section id="c1-target">
+      <div class="eyebrow">Ch.1 　開場</div>
+      <h2>它在批判誰：灌輸主義</h2>
+
+      <p class="lede">今天的學校，是圍繞著一組<strong>從未經科學檢驗的常識假設</strong>設計出來的——因為學校在十九、二十世紀成形時，人類對「人怎麼學習」幾乎一無所知。</p>
+
+      <p>Sawyer 把這組假設列成五條，它們彼此咬合成一個完整的系統：知識是事實與程序的集合；教育的目標是把它們裝進學生腦袋；教師的工作是傳遞；教材由簡到繁、順序由教師與教科書作者決定（<strong>而不是研究兒童實際怎麼學</strong>）；成效用「記住了多少」來測。</p>
+
+      <p>這套東西有兩個名字。Freire（1968）叫它<strong>銀行儲存式教育</strong> <span class="en">banking concept</span>——知識像存錢一樣被「存入」學習者腦中。學習科學家沿用 Papert 的說法，叫它<strong>灌輸主義</strong> <span class="en">instructionism</span>。</p>
+
+      <div class="note">
+        <span class="tag">論證的關鍵一步</span>
+        <p>批判灌輸主義不是靠價值宣稱，而是靠<strong>它的設計目的已經失效</strong>：它是為二十世紀初的工業經濟設計的，目標是培養順從而有效率的工人。1900 年約 <strong>95%</strong> 的工作是低技能、照他人設計好的程序執行；到 2020 年，先進經濟體中這類工作<strong>不到 10%</strong>。</p>
+        <p>加上網際網路——「凡是可以背下來的東西，都只是一次搜尋的距離」。記憶資訊曾是「受過教育」的核心，現在不是了。</p>
+      </div>
+
+      <p>取而代之的是<strong>創意時代</strong> <span class="en">the creative age</span>、建立在<strong>知識工作</strong>之上的經濟（Bereiter, 2002; Drucker, 1993）。它要求的是深層概念理解、創造性運用、批判閱讀、清楚表達、跨文化協作、終身學習——以及創造力，因為<strong>沒有創造性的工作終將被自動化</strong>。</p>
+    </section>
+
+    <section id="c1-seven">
+      <div class="eyebrow">Ch.1 　核心</div>
+      <h2>七項學習共識</h2>
+
+      <p class="lede">這是第 1 章最該背下來的一段：到 1990 年代、約二十年研究之後，學習科學家對學習達成的七點共識。</p>
+
+      <div class="findings">
+        <div>
+          <span class="num">01</span>
+          <h4>深層概念理解</h4>
+          <p>事實與程序只有在「知道何時用、如何為新情境修改」時才有用。深層理解讓知識能<strong>遷移</strong>到真實情境。</p>
+        </div>
+        <div>
+          <span class="num">02</span>
+          <h4>連結性學習</h4>
+          <p>每塊知識連向許多其他知識，跨學科形成網絡。專業知能是<strong>複雜的知識束</strong>，不是孤立事實的清單。</p>
+        </div>
+        <div>
+          <span class="num">03</span>
+          <h4>聚焦學習，不只是教學</h4>
+          <p>深層理解無法靠「老師教得更好」獲得，只能靠學生<strong>主動參與自己的學習</strong>。</p>
+        </div>
+        <div>
+          <span class="num">04</span>
+          <h4>設計學習環境</h4>
+          <p>學校要幫學生學到專家表現所需的全部知識。工具可簡如紙筆，可繁如擴增實境眼鏡。</p>
+        </div>
+        <div>
+          <span class="num">05</span>
+          <h4>群體與情境</h4>
+          <p>與同儕、教師協作時往往學得更好；教師引導的是一個<strong>即興的知識建構歷程</strong>。</p>
+        </div>
+        <div>
+          <span class="num">06</span>
+          <h4>建立在先備知識上</h4>
+          <p>學生不是空容器，帶著先入概念與<strong>迷思概念</strong>進教室。不觸及先備知識，學生只會學到「剛好通過考試」，出了教室就退回原本的迷思。</p>
+        </div>
+        <div>
+          <span class="num">07</span>
+          <h4>反思</h4>
+          <p>先<strong>表達</strong>發展中的知識（對話、報告、作品），再獲得機會<strong>反思性地分析</strong>自己的知識狀態。</p>
+        </div>
+      </div>
+
+      <p>注意這七項的內在結構：<strong>1–2 是關於知識長什麼樣</strong>，<strong>3–5 是關於學習在哪裡發生</strong>，<strong>6–7 是關於學習怎麼被推動</strong>。第 2 章之後會把 6–7 拆成更細的認知機制。</p>
+    </section>
+
+    <section id="c1-deep">
+      <div class="eyebrow">Ch.1 　表 1.1</div>
+      <h2>深層學習與傳統教室，是兩種認識論</h2>
+
+      <p>表 1.1 常被當成一張「好 vs 壞」對照表，但 Sawyer 在 1.1 節講得更準：<strong>這兩欄描述的是兩種不同的認識論</strong>——兩種對「知識是什麼、學習是什麼」的根本設定。</p>
+
+      <div class="scroll">
+        <table>
+          <caption>表 1.1（節錄與重整）</caption>
+          <thead>
+            <tr>
+              <th class="a">深層學習要求學習者……</th>
+              <th class="b">灌輸主義下，學習者實際上……</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>把新觀念連結到先備知識與經驗</td><td>把課程內容視為與既有所知毫不相干</td></tr>
+            <tr><td>把知識整合成相互關聯的概念系統</td><td>把課程內容視為彼此斷裂的碎片</td></tr>
+            <tr><td>尋找模式與底層原理</td><td>背事實、執行程序，不理解如何或為何</td></tr>
+            <tr><td>評估新觀念，並連結到結論</td><td>難以理解與教科書不同的新觀念</td></tr>
+            <tr><td>理解知識藉以創生的對話歷程，批判檢視論證邏輯</td><td>把知識視為全知權威傳下來的靜態物</td></tr>
+            <tr><td>反思自己的理解與自己的學習歷程</td><td>背誦，不反思目的，也不反思學習策略</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="c1-episte">
+      <div class="eyebrow">Ch.1 　1.1</div>
+      <h2>知識觀的轉向：從邏輯經驗論到情境性</h2>
+
+      <p>二十世紀上半葉，哲學界對科學知識的共識是<strong>邏輯經驗論</strong> <span class="en">logical empiricism</span>：科學知識＝關於世界的陳述＋可施加於這些陳述的邏輯運算。它與行為主義心理學結合，正好為灌輸主義提供了科學基礎——<strong>知識既然是事實與程序，教學當然就是傳遞事實與程序</strong>。</p>
+
+      <p>1960 年代起，社會學家、心理學家、人類學家開始研究科學家<strong>實際上怎麼工作</strong>，發現科學知識根本不是那樣。新的觀點是：科學知識是「關於如何做科學」的理解，加上被整合進概念架構的模型與解釋原理。科學實踐包含實驗、試誤、假設檢驗、辯論、論證，以及與同儕的頻繁往來——這些叫<strong>認識論實踐</strong> <span class="en">epistemological practices</span>。</p>
+
+      <h3>情境性</h3>
+      <p><strong>情境性</strong> <span class="en">situativity</span>：知識不是學習者腦中的靜態心智結構；「知」是一個歷程，涉及人、環境中的工具與他人，以及知識被應用其中的活動。在這個觀點下，<strong>學習發生於「協作活動中的參與模式隨時間改變」之時</strong>（Rogoff, 1990）。</p>
+
+      <div class="note">
+        <span class="tag">容易被忽略的但書</span>
+        <p>談<strong>真實實踐</strong> <span class="en">authentic practices</span> 時，指的是專家實踐的<strong>符合發展階段的版本</strong>——學生做不到跟受過訓練的專業人士完全一樣。學習科學最重要的工作之一，就是找出哪些實踐適合學生投入，以及<strong>如何在不失專業真實性的前提下做到年齡適切</strong>。</p>
+      </div>
+    </section>
+
+    <section id="c1-mech">
+      <div class="eyebrow">Ch.1 　1.2</div>
+      <h2>六個學習機制</h2>
+
+      <p>1.2 節把「學習怎麼發生、怎麼促進」拆成六塊。前兩塊講學習如何發生，後四塊講如何促進。</p>
+
+      <h3>學習如何發生</h3>
+      <ul class="plain">
+        <li><strong>新手到專家。</strong> 源頭是 1970–80 年代 AI 研究者為了在程式中複製專業知能，必須極詳盡描述專家知識。當他們轉向教育，多了一個新問題：<strong>專家是怎麼變成專家的？</strong> 研究策略是先弄清新手怎麼想、有哪些迷思概念，再設計課程<strong>利用</strong>這些迷思概念，讓學習者以最有效率的路徑抵達專家概念。</li>
+        <li><strong>先備知識。</strong> 學習永遠在既有知識的背景上發生。學生帶著「素樸物理／數學／生物」進教室。</li>
+      </ul>
+
+      <h3>如何促進</h3>
+      <ul class="plain">
+        <li><strong>鷹架</strong> <span class="en">scaffolding</span>：針對學習者當下目標與需求量身提供的支持。關鍵判準——<strong>告訴他怎麼做、或替他做，不是好鷹架</strong>，因為他沒有主動參與知識建構。好鷹架給的是提示與線索，幫他自己想出來。鷹架會逐步加上、修改、移除，最終<strong>完全淡出</strong> <span class="en">fading</span>。</li>
+        <li><strong>外化與表述</strong> <span class="en">externalization &amp; articulation</span>：不是「先學會、再表達」。最好的學習發生在學習者表述<strong>尚未成形</strong>的理解時；表述與學習形成相互增強的回饋迴路。很多時候<strong>要到開始表述才真正學會</strong>——出聲思考比安靜自習學得更快更深。理論根源是 Vygotsky：知識始於可見的社會互動，再逐漸被內化。</li>
+        <li><strong>反思／後設認知</strong> <span class="en">reflection / metacognition</span>：在學習的同時思考學習的歷程。表述之所以有用，正是因為它讓反思成為可能。順序是——先給工具幫學生表述，<strong>再</strong>支持他反思剛才表述的內容。</li>
+        <li><strong>從具體到抽象</strong>：Piaget 的洞見（1960–70 年代帶來數學教具的普及）。學習科學把它接手過來，用電腦把抽象的東西視覺化——連科學論證的結構、科學探究的逐步歷程都能被表徵。<strong>視覺與空間的理解常先於口語理解，並可用來建構口語理解。</strong></li>
+      </ul>
+    </section>
+
+    <section id="c1-socio">
+      <div class="eyebrow">Ch.1 　1.3</div>
+      <h2>社會文化轉向：從 AI 寒冬開始</h2>
+
+      <p>1980 年代，研究者發現「在電腦中模擬人類智能」的目標遙遙無期，幻滅之深被稱為<strong>「AI 寒冬」</strong>。退一步反省「認知科學為何不夠成功」時，最有影響力的答案來自社會文化、情境、分散式認知這一群相互關聯的取徑。</p>
+
+      <p>它們的共同起點：<strong>所有智慧行為都是在複雜環境中實現的</strong>——一個充滿工具與機器、同時也充滿合作者與夥伴的深度社會性環境。早期研究沿四條路線展開，<strong>全部都在正式學校之外</strong>：</p>
+
+      <ul class="plain">
+        <li><strong>社會化</strong>——兒童如何習得文化的規範與社群所重視的實踐。</li>
+        <li><strong>非正式學徒學習</strong>——非西方、無正式學校的社會（Cole, Lave, Rogoff, Saxe）。</li>
+        <li><strong>知識工作的社會分散性</strong>——海軍艦艇導航（Hutchins, 1995）、倫敦地鐵控制室、辦公室系統、航管中心。</li>
+        <li><strong>博物館與科學中心</strong>的學習。</li>
+      </ul>
+
+      <p>這四種場域的共同點：<strong>多人處於複雜角色關係中，與教室的威權結構截然不同</strong>；把學習想成孤立學習者腦中的心智歷程，就無法理解。這正是學習科學從此在<strong>兩個分析層次</strong>上運作的歷史原因——也是第 2 章整章的伏筆。</p>
+
+      <div class="note">
+        <span class="tag">一組必須分清的命題</span>
+        <p><strong>學習的歷程是普遍的，學習的內容因文化而異</strong>，而學習者既有的文化知識會影響其學習軌跡。</p>
+        <p>書中的例子：海地的論證實踐 <span class="en">bay odyans</span> 與西方「科學式」論證非常不同，但被引入科學課堂後，支持了海地裔美國青少年的生物與物理學習。推論——<strong>教室對表述的鷹架，應與學生社群的論述實踐相契合</strong>；而既然不同文化的論述實踐差異很大，公平的學習環境<strong>不應被設計成偏袒任何單一組文化實踐</strong>。</p>
+      </div>
+    </section>
+
+    <section id="c1-justice">
+      <div class="eyebrow">Ch.1 　1.4–1.5</div>
+      <h2>公平與科技：兩個常被誤讀的立場</h2>
+
+      <h3>社會正義</h3>
+      <p>學習科學的社會文化基礎，使它成為研究「學校教育如何再製社會不平等」的接納之地。機制是：家庭文化帶來的知識<strong>劇碼／資本</strong> <span class="en">repertoires / funds of knowledge</span>，<strong>當它們不被學校實踐辨識與運用時</strong>，該文化的學生就學得較差。Vossoughi &amp; Gutiérrez（2017）的說法是，不平等被再製，靠的是貶低被邊緣化群體的文化實踐，「從而使學業成功以文化同化為前提」。</p>
+
+      <p>由此導出一個很硬的規範結論：以學習科學為基礎的教學法<strong>縮小</strong>優勢與弱勢學生的成就落差（Haak et al., 2011; Theobald et al., 2020），所以<strong>不能再以「他們學不來」為理由</strong>，對邊緣化群體提供灌輸式、腳本化、威權式的次等教育。</p>
+
+      <h3>教育科技</h3>
+      <p>立場很明確：<strong>電腦只有在考慮了「兒童如何學習」、且與師生互動緊密整合時，才有益於學習</strong>。教育軟體太常讓電腦扮演傳統教師角色——當專家權威、傳遞資訊。自動化評量同樣只抓得住表層學習；<strong>自動化評量深層學習一直極其困難</strong>。學習科學主張電腦該當<strong>促進者</strong>：幫學習者協作，幫他們外化並反思發展中的知識。</p>
+
+      <p>書中也給了數字：2014 年 253 位研究者的調查中，約<strong>三分之二</strong>把「學習科技」列為興趣領域（最多人列的單一項）；2018 年對全球 75 個學習科學研究所課程的分析中，<strong>76%</strong> 教授「運用科技支持學習」（最廣泛教授的概念）。但全書<strong>沒有一章只談科技</strong>。</p>
+    </section>
+
+    <section id="c1-method">
+      <div class="eyebrow">Ch.1 　1.6</div>
+      <h2>方法論：為什麼不能只靠實驗設計</h2>
+
+      <p>實驗與準實驗設計能告訴我們不同取徑的相對優劣，但<strong>無法告訴我們某種教學法「為什麼」或「如何」奏效</strong>——也就是導向學習的那個逐分逐秒的教室活動結構。要能改善教學法，就得研究那些歷程。</p>
+
+      <p><strong>互動分析</strong> <span class="en">interaction analysis</span> 同時追蹤三件事的逐刻開展：<strong>（1）</strong>學習者之間的關係與互動模式如何隨時間改變；<strong>（2）</strong>學習者投入的實踐——個人與群體的解題程序——如何改變；<strong>（3）</strong>個體學習。</p>
+
+      <ul class="plain">
+        <li>2014 年 253 位學習科學家中，<strong>只有約 20 人</strong>專用量化方法；其餘或專用質性，或混合。</li>
+        <li>典型計畫<strong>至少一年</strong>，有些追蹤數年；觀察結束後還有數百小時影片要反覆看、轉錄、編碼。</li>
+        <li>研究時焦點不斷拉近推遠：研究某堂課的<strong>微觀發生</strong>，再分析它如何促成長期的深層概念理解。</li>
+      </ul>
+    </section>
+
+    <!-- ===================== CH 2 ===================== -->
+
+    <section id="c2-def">
+      <div class="eyebrow">Ch.2 　2.1</div>
+      <h2>先把「學習」定義掉</h2>
+
+      <p class="lede">Nathan &amp; Sawyer 給的定義極簡：<strong>學習就是行為的持久改變</strong> <span class="en">lasting changes in behavior</span>。只要存在行為的持續改變，就可歸因於某種學習歷程。</p>
+
+      <p>這個定義刻意寬到能同時涵蓋神經連結的改變、模式知覺、程序、事實、概念、社會實踐與參與方式，一路到機構以新政策運作的方式。<strong>它寬得幾乎沒有篩選力——這正是重點</strong>：定義不負責劃界，劃界的工作交給下一節的時間尺度。</p>
+
+      <p>同時，第 2 章把學習科學定位在<strong>基礎科學＋設計科學</strong>的雙重身分。它既做為求根本理解的研究，也做<strong>轉譯研究</strong>；<strong>橋接研究與實務</strong>這件事，正是它區別於認知心理學、教育心理學、人類學（純基礎），以及教學設計、教育科技（純應用）的地方。</p>
+    </section>
+
+    <section id="c2-time">
+      <div class="eyebrow">Ch.2 　圖 2.1</div>
+      <h2>用時間尺度統一整個領域</h2>
+
+      <p>學習歷程橫跨十二個數量級。把它們沿<strong>單一參數——時間</strong>排開（以 10 為底的對數尺度），原本看似不相干的研究就落在同一條線上：</p>
+
+      <figure>
+        <div class="fig-frame">
+          <svg viewBox="0 0 920 210" role="img" aria-label="人類學習歷程的對數時間尺度，從十的負二次方秒的生物歷程到十的十次方秒的組織歷程">
+            <!-- bands -->
+            <rect class="band-r" x="40"  y="46" width="70"  height="38"></rect>
+            <rect class="band-r" x="110" y="46" width="140" height="38"></rect>
+            <rect class="band-r" x="320" y="46" width="140" height="38"></rect>
+            <rect class="band-r" x="530" y="46" width="140" height="38"></rect>
+            <rect class="band-r" x="740" y="46" width="140" height="38"></rect>
+
+            <text class="band-t" x="75"  y="36" text-anchor="middle">生物</text>
+            <text class="band-t" x="180" y="36" text-anchor="middle">認知</text>
+            <text class="band-t" x="390" y="36" text-anchor="middle">知識本位</text>
+            <text class="band-t" x="600" y="36" text-anchor="middle">社會文化</text>
+            <text class="band-t" x="810" y="36" text-anchor="middle">組織</text>
+
+            <text class="band-s" x="75"  y="70" text-anchor="middle">百分之一秒以下</text>
+            <text class="band-s" x="180" y="70" text-anchor="middle">十分之一秒–十秒</text>
+            <text class="band-s" x="390" y="70" text-anchor="middle">數秒–數小時</text>
+            <text class="band-s" x="600" y="70" text-anchor="middle">數天–數月</text>
+            <text class="band-s" x="810" y="70" text-anchor="middle">數年以上</text>
+
+            <!-- axis -->
+            <line class="ax-line" x1="40" y1="118" x2="880" y2="118"></line>
+
+            <line class="ax-tick" x1="40"  y1="118" x2="40"  y2="126"></line>
+            <line class="ax-tick" x1="180" y1="118" x2="180" y2="126"></line>
+            <line class="ax-tick" x1="320" y1="118" x2="320" y2="126"></line>
+            <line class="ax-tick" x1="460" y1="118" x2="460" y2="126"></line>
+            <line class="ax-tick" x1="600" y1="118" x2="600" y2="126"></line>
+            <line class="ax-tick" x1="740" y1="118" x2="740" y2="126"></line>
+            <line class="ax-tick" x1="880" y1="118" x2="880" y2="126"></line>
+
+            <text class="ax-lab" x="40"  y="144" text-anchor="middle">10<tspan dy="-5" font-size="9">−2</tspan></text>
+            <text class="ax-lab" x="180" y="144" text-anchor="middle">10<tspan dy="-5" font-size="9">0</tspan></text>
+            <text class="ax-lab" x="320" y="144" text-anchor="middle">10<tspan dy="-5" font-size="9">2</tspan></text>
+            <text class="ax-lab" x="460" y="144" text-anchor="middle">10<tspan dy="-5" font-size="9">4</tspan></text>
+            <text class="ax-lab" x="600" y="144" text-anchor="middle">10<tspan dy="-5" font-size="9">6</tspan></text>
+            <text class="ax-lab" x="740" y="144" text-anchor="middle">10<tspan dy="-5" font-size="9">8</tspan></text>
+            <text class="ax-lab" x="880" y="144" text-anchor="middle">10<tspan dy="-5" font-size="9">10</tspan></text>
+
+            <text class="ax-lab" x="40"  y="176">秒（對數尺度，每格 ×100）</text>
+            <text class="ax-lab" x="880" y="176" text-anchor="end">Adapted from Nathan &amp; Alibali (2010)</text>
+          </svg>
+        </div>
+        <figcaption>圖 2.1　為什麼選時間而不是空間尺度：Lemke（2000）指出，對學習歷程而言，尺寸與空間組織無法充分捕捉人類行為的重要特質。以時間切分，既降低了「理解學習整體」的複雜性，<strong>又保留了那些行為本身的複雜性</strong>。</figcaption>
+      </figure>
+    </section>
+
+    <section id="c2-stokes">
+      <div class="eyebrow">Ch.2 　表 2.1</div>
+      <h2>Stokes 四象限：學習科學橫跨全部四格</h2>
+
+      <div class="quad">
+        <div class="hd">是否追求<br>根本理解</div>
+        <div class="hd">不考慮應用</div>
+        <div class="hd">考慮應用</div>
+
+        <div class="side">追求<br>（Yes）</div>
+        <div class="cell"><strong>基礎研究</strong><span>互動分析、實驗設計</span></div>
+        <div class="cell star"><strong>受應用啟發的基礎研究</strong><span>設計本位研究、臨場實驗 <span class="en">in vivo</span></span></div>
+
+        <div class="side">不追求<br>（No）</div>
+        <div class="cell"><strong>既非基礎亦非應用</strong><span>成效研究、觀察、回顧、評鑑</span></div>
+        <div class="cell"><strong>應用研究</strong><span>課程設計</span></div>
+      </div>
+
+      <p>重點在右上那格——<strong>受應用啟發的基礎研究</strong> <span class="en">use-inspired basic research</span>，也就是 Pasteur's quadrant。理由第 2 章講得很直白：<strong>設計有效學習環境的努力，不可能只奠基於經科學驗證的學習理論；理論的進展往往太慢、太粗略、也太理想化。</strong></p>
+
+      <h3>學習工程</h3>
+      <p>所以學習科學同時是一門<strong>設計科學</strong>，採用工程精神。工程取徑的成功判準不是「世界如何運作」的理論說明，而是<strong>滿意解</strong> <span class="en">satisficing solutions</span>——在既有限制下滿足現有條件、充分達成目標的創新（Simon, 1996）。做法是「設計—實施—評鑑—再設計」的迭代，搭配頻繁的形成性評量，讓路線能<strong>即時修正</strong>那些現行科學模型沒能規範的決策。</p>
+    </section>
+
+    <section id="c2-found">
+      <div class="eyebrow">Ch.2 　2.2</div>
+      <h2>五大思想基礎</h2>
+
+      <ul class="plain">
+        <li><strong>美國實用主義。</strong> Dewey 的兒童中心教學與探究——兒童像科學家或哲學家那樣與世界互動時學得最好。Mead 主張思想從有機體與現實的互動中湧現。這條線經 Blumer 的<strong>符號互動論</strong>、Garfinkel 的<strong>俗民方法學</strong>、<strong>對話分析</strong>，一路長成學習科學今天的<strong>互動分析</strong>與<strong>紮根理論分析</strong>。</li>
+        <li><strong>建構主義。</strong> 學習是心智結構的<strong>主動創造</strong>，不是被動內化。Piaget 的<strong>基模</strong>先從具體物理動作浮現，再發展為抽象概念實體。分支：激進建構主義（各自形成自己的現實，無外在真理）、社會建構主義（知識建構本質上由社會互動中介）。實務遺產：舊金山探索館的動手做、Papert 的 <strong>Logo</strong>「小烏龜」——後者是 Scratch、實體運算與自造者運動的直接先驅。</li>
+        <li><strong>社會文化理論。</strong> Vygotsky：社會互動與文化工具是智力發展的首要驅動力；<strong>知識起初是分散的、情境化的社會實踐，然後才被內化為個體心智</strong>。透過鷹架，兒童能表現得比獨自運作更高一層。</li>
+        <li><strong>情境學習。</strong> 這裡有一句<strong>界定學科邊界</strong>的話：學習科學把學習當作普遍的人類社會現象研究，不限於實驗室或教室——<strong>這是與教育心理學的決定性差異</strong>。分析單位往往是包含學習者、他人、材料與工具的<strong>複雜學習環境</strong>。理論上受現象學影響：知覺與表徵是與世界<strong>紮根的互動</strong>，而非關於世界的內在心智表徵。</li>
+        <li><strong>具身、嵌入、延展、分散式認知。</strong> 傳統理論把心智結構當成抽象、無模態、與世界任意對應的符號（<span class="en">AAA symbols</span>）。但在真實情境中觀察到的學習，是身體與知覺皆主動的歷程。</li>
+      </ul>
+
+      <div class="scroll">
+        <table>
+          <caption>四個「-ed / -uted」認知，很容易混</caption>
+          <thead><tr><th>術語</th><th>主張</th></tr></thead>
+          <tbody>
+            <tr><td><strong>具身</strong> <span class="en">embodied</span></td><td>身體狀態與身體本位資源<strong>與智力行為密不可分</strong>；符號的意義直接連到活生生的身體經驗。</td></tr>
+            <tr><td><strong>嵌入</strong> <span class="en">embedded</span></td><td>認知由物理與社會環境中介，包括用環境<strong>卸載</strong>本來要在心裡做的事——清單、地圖、自己的身體。</td></tr>
+            <tr><td><strong>分散式</strong> <span class="en">distributed</span></td><td>知識與推理是社會系統的<strong>湧現屬性</strong>，共同構成，<strong>不被任何單一成員「擁有」</strong>（Hutchins 的艦艇導航）。</td></tr>
+            <tr><td><strong>延展</strong> <span class="en">extended</span></td><td>在某些情況下，社會與物理環境<strong>連同其中的個體</strong>，共同構成了認知系統（Clark &amp; Chalmers, 1998）。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="c2-episte">
+      <div class="eyebrow">Ch.2 　2.3.1</div>
+      <h2>兩種認識論：獲得 vs 參與</h2>
+
+      <div class="spine">
+        <div>
+          <h4>獲得隱喻</h4>
+          <span class="lat">acquisition epistemology（Sfard, 1998）</span>
+          <dl>
+            <dt>知識是</dt><dd>行動者「擁有」的心智物件，存在腦中</dd>
+            <dt>動詞</dt><dd>被「操作」以生成新知識、被「傳遞」給他人</dd>
+            <dt>對應理論</dt><dd>實用主義、建構主義</dd>
+            <dt>學科出身</dt><dd>西方學術心理學的典型立場</dd>
+          </dl>
+        </div>
+        <div>
+          <h4>參與隱喻</h4>
+          <span class="lat">participation epistemology（Sfard, 1998）</span>
+          <dl>
+            <dt>學習由</dt><dd>投入的社群參與與歸屬感所驅動</dd>
+            <dt>持久改變來自</dt><dd>學習者採納社群的規範與實踐——說話、行動、甚至思考的方式</dd>
+            <dt>對應理論</dt><dd>社會文化理論、情境學習、分散式知識、具身認知</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section id="c2-super">
+      <div class="eyebrow">Ch.2 　2.3.2</div>
+      <h2>複雜系統與附隨性</h2>
+
+      <p><strong>複雜系統</strong>是動態、自我調節、保存歷史的系統，其<strong>湧現屬性</strong>來自大量元素之間豐富而非決定性的互動。要區分兩個容易混的概念：</p>
+
+      <ul class="plain">
+        <li><strong>完全可分解</strong> <span class="en">fully decomposable</span>：只是「繁複」而非「複雜」——模組仍會互動，但功能獨立。例：控制眼球運動的<strong>跳視</strong>。<strong>測量工具的開發依賴完全可分解性</strong>。</li>
+        <li><strong>近乎可分解</strong> <span class="en">nearly decomposable</span>：短期可獨立，長期與系統表現高度互連。例：<strong>閱讀理解策略</strong>——能相對孤立地測量與改善，但終究與社會技術環境、讀者、任務目標互動。這類系統適合用<strong>臨場實驗</strong>研究。</li>
+      </ul>
+
+      <h3>附隨性</h3>
+      <p><strong>附隨性</strong> <span class="en">supervenience</span> 是全章的接合劑：系統在<strong>較高層次描述</strong>的行為變化，與該系統在<strong>較低層次描述</strong>的相應變化之間的關係。書中的範例鏈是：</p>
+
+      <div class="chain">
+        <b>閱讀理解歷程</b><i>附隨於 →</i><b>解碼</b><i>附隨於 →</i><b>視覺歷程（眼球注視）</b>
+      </div>
+
+      <p>這個概念在第 2 章後半反覆出現，用來說明<strong>群體層次的介入為什麼終究要靠個體層次的機制才能生效</strong>：協作論述附隨於個體管理認知負荷與主動建構意義的歷程；引導式探究之所以有效，是因為它<strong>一次附隨於好幾個最有效的認知機制</strong>，而且整合在一個連貫系統裡。</p>
+    </section>
+
+    <section id="c2-spine">
+      <div class="eyebrow">Ch.2 　2.3.3 / 2.4 / 2.5</div>
+      <h2>全章的脊椎：元素式與系統式</h2>
+
+      <p class="lede">差別只有一個判準——<strong>是否採用「因子化假設」</strong> <span class="en">factoring assumption</span>：能不能把學習系統的某個組成（例如情境）「因子化抽出」來獨立分析。</p>
+
+      <div class="spine">
+        <div>
+          <h4>元素式</h4>
+          <span class="lat">elemental</span>
+          <dl>
+            <dt>分析單位</dt><dd>個別學習者</dd>
+            <dt>因子化假設</dt><dd>採用</dd>
+            <dt>對應理論</dt><dd>建構主義等「獨立於社會脈絡的可類化發現」</dd>
+            <dt>四項原則</dt>
+            <dd>
+              <strong>策略性調節的重複與練習</strong>——間隔練習、提取練習；狹窄的知覺／動作技能用<strong>區塊式</strong>，概念導向用<strong>交錯式</strong>。<br>
+              <strong>管理認知負荷</strong>——降低注意力分散、切分資訊、結構良好的材料、故事與個案。<br>
+              <strong>主動建構意義</strong>——但認知負荷<strong>不能降太多</strong>：太有組織、太容易，就會被動淺層處理。<strong>合意的困難</strong>與失敗是有生產力的。<br>
+              <strong>後設認知覺察</strong>——多數學習者需要協助才能有效自我監控；<strong>最耗時的方法（如重複閱讀）往往最沒生產力</strong>。
+            </dd>
+          </dl>
+        </div>
+        <div>
+          <h4>系統式</h4>
+          <span class="lat">systemic</span>
+          <dl>
+            <dt>分析單位</dt><dd>學習者群體／整個活動系統</dd>
+            <dt>因子化假設</dt><dd>不採用</dd>
+            <dt>對應理論</dt><dd>社會文化理論、情境認知、具身認知</dd>
+            <dt>三項原則</dt>
+            <dd>
+              <strong>協作論述與論證</strong>——合作型小組的學習增益大於競爭或個人式；論述<strong>品質</strong>影響個體後續遷移。但<strong>學習者不會自發地有效協作</strong>，需要示範、引導、腳本。<br>
+              <strong>真實學科實踐</strong>——同樣不會自然發生，要結構化成可及、且符合發展進程的樣子。專家有<strong>內隱知識</strong>，學習環境要把它<strong>可見化</strong>。<br>
+              <strong>引導式探究與 PBL</strong>——優於無引導的發現式學習，也優於單純聽講。PBL 學生表現優於講述式教室，<strong>不分性別或族裔</strong>。
+            </dd>
+          </dl>
+        </div>
+      </div>
+
+      <p>Lave（1988）那句常被引用的話正是系統式立場的濃縮：日常認知是「<strong>橫跨</strong>心智、身體、活動與文化組織的情境，而<strong>不是被劃分</strong>於其間」。在這個觀點下，<strong>情境不是裝著孤立規律性的容器，而是產生該現象之複雜因果場域的一部分</strong>。</p>
+    </section>
+
+    <section id="c2-integrate">
+      <div class="eyebrow">Ch.2 　2.6</div>
+      <h2>整合：DBR 與縮小規模法</h2>
+
+      <p>兩種取徑<strong>不是對立而是相輔相成</strong>，哪個提供更大理解取決於所研究的現象與理論家的目的。整合的兩個具體機制：</p>
+
+      <h3>設計本位研究</h3>
+      <p><strong>DBR</strong> 同時用兩邊：以<strong>系統式</strong>取徑承認學習環境設計與學習理論的相互關聯、提供整體性說明；以<strong>元素式</strong>取徑測量個體學習成果與中介因子、支撐再設計的分析。納入政策與大規模實施的變體是 <strong>DBIR</strong>。DBR 因此<strong>模糊了研究與發展的傳統區分</strong>。</p>
+
+      <h3>為什麼規模化上升那麼難</h3>
+      <p>成功的 scale-up 在實務上仍然罕見。系統式取徑能給出豐富說明，但<strong>試圖控制它們會帶來非預期後果</strong>；元素式取徑帶來精確與控制，但<strong>誤用因子化假設</strong>會產出對在地限制不敏感、因而很少能成功規模化的設計。</p>
+
+      <h3>縮小規模法</h3>
+      <p><strong>scale-down</strong> 是替代路線，把兩者編織在一起。它的方向與直覺相反——<strong>從真實情境的整體觀察開始，往下拆，再裝回去</strong>：</p>
+
+      <ol class="steps">
+        <li>在<strong>真實情境</strong>中、於穩固的實務工作者—研究者夥伴關係下，以<strong>系統式</strong>觀點研究學習環境。</li>
+        <li>分析這些觀察，<strong>辨識焦點學習成果</strong>。</li>
+        <li>指認出影響系統表現的<strong>近乎可分解的子系統</strong>。</li>
+        <li>用<strong>元素式方法</strong>（實驗室或臨場實驗）修改這些子系統。</li>
+        <li>與教育實務工作者合作，把修改後的子系統<strong>重新整合回系統</strong>。</li>
+        <li>再度以<strong>系統式方法</strong>，在自然情境中觀察<strong>系統整體</strong>的行為。</li>
+      </ol>
+
+      <p>實例：Davenport 等人（2020）重新設計 <em>Connected Mathematics 2</em>——把印刷手冊的文字與圖像組織、練習排程、測驗實務、範例與自我解釋的作業運用、教師專業發展，全部當成近乎可分解的子系統，分頭修改後再整合為系統式整體。</p>
+    </section>
+
+    <!-- ===================== 複習 ===================== -->
+
+    <section id="seam">
+      <div class="eyebrow">複習</div>
+      <h2>兩章的接縫在哪</h2>
+
+      <p>第 1 章結尾埋的伏筆，第 2 章整章在還：<strong>學習科學為什麼必須在兩個分析層次上運作</strong>。</p>
+
+      <ul class="plain">
+        <li>第 1 章從<strong>歷史</strong>回答：因為社會文化轉向（AI 寒冬之後的四條研究路線）讓這個領域不得不從個體認知擴展到群體與情境。</li>
+        <li>第 2 章從<strong>理論</strong>回答：因為學習現象本身是複雜系統，而複雜系統可以在不同層次上被分析；<strong>附隨性</strong>說明了兩個層次如何接合，<strong>因子化假設</strong>則是判定該用哪一層的判準。</li>
+        <li>第 1 章的七項共識裡，「深層概念理解／先備知識／反思」在第 2 章變成元素式的四項原則；「群體與情境」變成系統式的三項原則。<strong>同一批發現，被重新編進一個有座標的框架裡。</strong></li>
+      </ul>
+
+      <p>第 2 章結尾點出的<strong>表面悖論</strong>值得記：元素式研究貢獻了學習科學的基礎，卻<strong>未必在最新出版品中被置於前景</strong>——因為這個領域正把<strong>學習工程</strong>列為優先，提出設計本位的問題。但那些從系統式觀點構想的設計，<strong>本身就奠基於元素式取徑的發現</strong>。</p>
+    </section>
+
+    <section id="traps">
+      <div class="eyebrow">複習</div>
+      <h2>易混淆對照</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>看起來像同一件事</th><th>其實</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>建構主義</strong> <span class="en">constructivism</span> ／ <strong>建構論</strong> <span class="en">constructionism</span></td>
+              <td>前者是 Piaget 的學習理論（心智結構的主動創造）；後者是 Papert 的立場，強調透過<strong>建造外在人造物</strong>來學習（Logo、小烏龜）。</td>
+            </tr>
+            <tr>
+              <td><strong>元素式＝量化、系統式＝質性</strong></td>
+              <td><strong>錯。</strong> 書中明說這是錯誤對應：放聲思考是<strong>質性</strong>方法卻用於<strong>因子化抽出</strong>元素式認知歷程；社會網絡分析與教育資料探勘用<strong>大量量化</strong>資訊形成<strong>系統式</strong>描述。</td>
+            </tr>
+            <tr>
+              <td><strong>學習風格</strong> <span class="en">learning styles</span></td>
+              <td><strong>迷思。</strong> 沒有證據支持「依學習風格提供專門教學」。書中特別註明這在美國以外通常不常見，且<strong>沒有證據顯示某些學生更適合灌輸主義</strong>。</td>
+            </tr>
+            <tr>
+              <td><strong>規模化上升</strong> <span class="en">scale up</span> ／ <strong>縮小規模</strong> <span class="en">scale down</span></td>
+              <td>前者是從測試場址往外推廣；後者是<strong>方法論路線</strong>——從系統式整體觀察起步，往下拆出近乎可分解的子系統，用元素式方法改，再裝回去。</td>
+            </tr>
+            <tr>
+              <td><strong>效能</strong> <span class="en">efficacy</span> ／ <strong>成效</strong> <span class="en">effectiveness</span></td>
+              <td>結論節並列出現。效能偏向受控條件下能否奏效，成效偏向真實情境中實際奏效；注意成效研究在 Stokes 表中落在<strong>「既非基礎亦非應用」</strong>那格。</td>
+            </tr>
+            <tr>
+              <td><strong>完全可分解</strong> ／ <strong>近乎可分解</strong></td>
+              <td>完全可分解＝只是「繁複」，模組功能獨立（跳視）；近乎可分解＝短期獨立、長期互連（閱讀理解策略）。<strong>測量工具依賴前者，臨場實驗處理後者。</strong></td>
+            </tr>
+            <tr>
+              <td><strong>學習歷程 vs 學習內容的文化普遍性</strong></td>
+              <td>歷程普遍、<strong>內容因文化而異</strong>。以學習科學為基礎的教學法對所有群體都更有效，且能<strong>縮小</strong>成就落差——不是「對某些文化較有效」。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="years">
+      <div class="eyebrow">複習</div>
+      <h2>關鍵年表</h2>
+
+      <dl class="years">
+        <div><dt>1987</dt><dd>IRL 於 Palo Alto 成立；西北大學延攬 Roger Schank，成立 ILS</dd></div>
+        <div><dt>1991</dt><dd><strong>領域誕生</strong>：《Journal of the Learning Sciences》創刊（1 月）；首屆 ICLS 於西北大學舉行；Pea 創立第一個學習科學博士學程</dd></div>
+        <div><dt>1996</dt><dd>第二屆學習科學研討會，首度獨立於 AIED 之外</dd></div>
+        <div><dt>1997</dt><dd>CSCL 首度在美國以外舉行（多倫多）</dd></div>
+        <div><dt>2002</dt><dd><strong>ISLS 成立</strong>，把學習科學與 CSCL 兩個社群合在一起</dd></div>
+        <div><dt>2006</dt><dd>《IJCSCL》創刊；本手冊第一版</dd></div>
+        <div><dt>2008</dt><dd>ICLS 首度在美國以外舉行（Utrecht）</dd></div>
+        <div><dt>2014</dt><dd>手冊第二版；《JLS》社會正義研究專刊</dd></div>
+        <div><dt>2020</dt><dd>ISLS 成立<strong>公平與正義委員會</strong></dd></div>
+        <div><dt>2021</dt><dd>ICLS 與 CSCL 合併為單一 ISLS 年會（Bochum，因疫情線上舉行）</dd></div>
+        <div><dt>2022</dt><dd>本手冊第三版——一個只有三十年歷史、卻已完全成形的學術學科</dd></div>
+      </dl>
+    </section>
+
+  </main>
+
+  <footer>
+    整理自 <em>The Cambridge Handbook of the Learning Sciences</em>（3rd ed., 2022）第 1 章（Sawyer, pp. 1–26）與第 2 章（Nathan &amp; Sawyer, pp. 27–52）。頁碼與節次依原書；此頁為重點統整，細節仍以逐頁翻譯稿與原文為準。
+  </footer>
+
+</div>
