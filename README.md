@@ -2,7 +2,9 @@
 
 《The Cambridge Handbook of the Learning Sciences》（3rd ed., 2022）第 1、2 章的**個人重點統整**，單一 HTML 檔，離線可開。
 
-開啟方式：下載後用瀏覽器打開 [`index.html`](index.html)。無需安裝任何東西、不需要網路（僅字型從 Google Fonts 載入，離線時會自動退回系統字型）。
+**線上閱讀 → <https://jie-ting.github.io/WEEK1/>**
+
+或下載後用瀏覽器打開 [`index.html`](index.html)：單一檔案、無需安裝任何東西、不需要網路（僅字型從 Google Fonts 載入，離線時會自動退回系統字型）。支援淺色／深色模式，手機可讀。
 
 ---
 
